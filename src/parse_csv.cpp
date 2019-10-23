@@ -4,11 +4,13 @@
 
 
 
-csv::csv(std::string filename)
+csv::csv(std::string filename, int skip_rows)
 {
         std::ifstream file(filename);
         std::string line;
-        while(getline(file,line)){
+	for( int i = 0; i != skip_rows; ++i)
+		std::getline(file,line);
+        while(std::getline(file,line)){
                 if (!line.empty())
                 {
                         std::vector<std::string> columns = split(line,',');
